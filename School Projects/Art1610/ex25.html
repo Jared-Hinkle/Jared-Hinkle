@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+<title>Bird Drop</title>
+<style>
+/*comment this line below to get rid of debugging borders */
+/*body * { border: 1px dotted black; }*/
+body {
+	font-family: 'Bevan', cursive;
+	text-align: center;
+	background: #f00; transition: 2s ease;
+}
+.bgcolor2 { background: #f94e4e; transition: 2s ease;}
+.bgcolor3 { background: #f57b7b; transition: 2s ease;}
+.bgcolor4 { background: #f5b6b6; transition: 2s ease;}
+button { font-family: 'Bevan', cursive; font-size: 150%; background: silver;
+padding: 10px; border-radius: 5px; margin: 10px; }
+/* LARGER FONT SIZES */
+p { font-size: 300%; }
+#drag-area { width: 80vw; height: 70vh; margin: 0 auto;}
+#textbox1 { position: absolute; bottom: 0; left: 50%;
+    transform: translate(-50%, 0%); }
+.nosee {
+	opacity: 0;
+	transition: 1s ease;
+	}
+.dosee {
+	opacity: 1;
+	transition: 3s ease;
+	}
+/* DRAG & DROP WITH STATE CHANGES */
+/* DRAGGABLE */
+.draggable {
+width: 50px; height: 50px; position: relative; font-size: 300%; line-height: 60px;
+}
+.draggable:after {
+	content: "😥";
+}
+/* DROPPABLE */
+.droppable {
+    width: 160px; height: 150px; line-height: 170px;
+    font-size: 1000%;
+}
+.droppable:after {
+	content: "👩";
+}
+/* DRAGGABLE WHILE DRAGGING*/
+.ui-draggable-dragging:after {
+	content: "🤣";
+}
+/* When you drop draggable over droppable, droppable does this: */
+.ui-state-highlight:after {
+	content: "👨‍👩‍👧‍👦";
+}
+/* When you start dragging, droppable does this: */
+.ui-state-active:after {
+    content: "👫";
+}
+/* When your draggable is over the droppable, droppable does this: */
+.ui-state-hover:after {
+    content: "👪";
+}
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#birdbox { width: 200px; position: absolute;
+	top: 25%; left: 50%; transform: translate(-50%, -50%);}
+#dropbox { position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); }
+</style>
+<!-- END OF STYLES -->
+
+<!-- BEGINNING OF SCRIPTS -->
+<script>
+$(document).ready(function(){
+    //Enable IOS sounds
+    $("#ibutton").click(function(){
+		enable_audio($("#ooh"));
+		enable_audio($("#yum"));
+		$("#dothis").addClass("dosee");
+		$("#dropbox").addClass("dosee");
+	});
+	function enable_audio(el){
+		var myaudio=el[0];
+		if(el.data('audio_enabled'))return;
+		myaudio.currentTime=myaudio.duration-1;
+		myaudio.play().then(function(){myaudio.pause();myaudio.load();});
+		el.data('audio_enabled',true);
+	}
+    // DRAGGABLES
+    $(".draggable").mouseover(function(){
+			$(this).addClass("ui-draggable-dragging");
+    });
+    $(".draggable").mouseout(function(){
+			$(this).removeClass("ui-draggable-dragging");
+    });
+});//end of document ready
+</script>
+
+<!-- DROPABLE -->
+<script>
+  //ESTABLISH DROPS VARIABLE HERE OUTSIDE DRAG FUNCTION
+	var drops = 0;
+  $( function() {
+ 	$("[class*=draggable]").draggable({
+			containment: "#drag-area",
+			revert: true
+    });
+    $( ".droppable" ).droppable({
+			classes: {
+				"ui-droppable-active": "ui-state-active",
+				"ui-droppable-hover": "ui-state-hover"
+			},
+      drop: function(event, ui) {
+				$("#drop-target-1")
+
+			//change droppable's state
+				.addClass("ui-state-hightlight")
+          	//play sound
+				$("#ooh") [0].play();
+			//draggable disappears
+				var elem = ui.draggable;
+				$(elem.parent()).hide();
+        //COUNT TIMES YOU DROP & MAKE RESULTS
+				drops=drops+1;
+        if (drops == 1) {
+					$("body").addClass("bgcolor2");
+     		}
+     		else if (drops == 2) {
+					$("body").addClass("bgcolor3");
+     		}
+     		else if (drops == 3) {
+					$("body").addClass("bgcolor4");
+					$("#textbox1").addClass("dosee");
+					$("#laugh") [0].play;
+     		};
+
+      }/* end drop function */
+    }); /* end .droppable */
+  } ); /* end function */
+</script>
+</head>
+<!-- BODY STARTS HERE -->
+<body>
+
+<audio id="ooh" src="http://grin3design.com/audio/ooh.mp3" preload="auto"></audio>
+<audio id="yum" src="http://grin3design.com/audio/yum.mp3" preload="auto"></audio>
+
+<div id="drag-area">
+
+		<button id="ibutton">:( Sad??</button>
+		<div id="dothis" class="talk nosee">Drag the sad child to its mother</div>
+
+		<div id="dropbox" class="nosee">
+			<div class="droppable" id="drop-target-1"></div>
+		</div><!-- END OF DROPBOX -->
+
+		<div id="birdbox" class="flex-container">
+			<div class="bird"><div id="bird1" class="draggable"></div></div>
+			<div class="bird"><div id="bird2" class="draggable"></div></div>
+			<div class="bird"><div id="bird3" class="draggable"></div></div>
+		</div><!-- END OF BIRDBOX - Flex -->
+
+		<div class="textbox nosee" id="textbox1"><p>You saved the kids!</p></div>
+
+</div><!-- END OF drag-area -->
+
+</body>
+</html>

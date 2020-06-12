@@ -1,0 +1,125 @@
+body{
+  background: darkgray;
+  font-family: Helvetica, Arial, sans-serif;
+  margin:0; padding:0;
+}
+#home{
+  background:
+  url("http://4.bp.blogspot.com/-vP_l_GwJmVI/T__WsNmOAAI/AAAAAAAACCk/g2GCcGamz28/s1600/cmsu09.jpg");
+  background-size: cover;}
+#away{
+  background:
+  url("https://bookitimages.com/5.0/hero-5.jpg?i10c=img.resize(width:1320,height:800)");
+  background-size: cover;}
+#some-else{
+  background:
+  url("https://media.wired.com/photos/5a970eb4927dc94e67685b0e/master/pass/matterhorn-802950172.jpg"); background-size: cover;}
+#some-new{
+  background:
+  url("https://www.visittheusa.com/sites/default/files/styles/hero_m_1300x700/public/images/hero_media_image/2017-02/Alaska8_Web72DPI_2.jpg?itok=2T1bWB1V"); background-size: cover;}
+header {
+  background: red;
+  height: 80px;
+  position: relative;
+  padding: 0px;
+}
+#away header{
+  background: orange;
+
+}
+#some-else header{
+  background: cyan;
+
+}
+#some-new header{
+  background: lime;
+
+}
+h1{
+  display-height: inline-block;
+  line-height: 80px;
+  margin: 0px 0px 0px 50px;
+  position: absolute;
+  bottom: 0px
+}
+h1:hover{
+  color: white;
+}
+#menu{
+  line-height: 80px;
+  position: absolute;
+  top: -80px;
+  right: 0px;
+  width: 125px;
+  text-align: center;
+}
+nav{
+  position: absolute;
+  top: 0px;
+  right: 50px;
+}
+nav ul{
+  list-style-type: none;
+  text-align: center;
+  padding: 0px; margin: 0px;
+}
+nav li{
+  width: 125px;
+  float: right;
+}
+nav a{
+  text-decoration: none;
+  color: white;
+  line-height: 80px;
+  letter-spacing: .1em;
+  display: block;
+}
+nav a:hover{
+  background: rgba(100%,100%,100%,0.5);
+  color: black;
+}
+nav a:active{
+  background: rgba(15%,15%,15%,0.5);
+  color: black;
+}
+#home #homelink a, #away #awaylink a, #some-else #some-elselink a, #some-new #some-newlink a{
+  background: rgba(0%,0%,0%,0.5);
+  color:white;
+  text-shadow: 1px 1px black;
+}
+/* SUB MENUS */
+nav li ul{
+  position: absolute;
+  display: none;
+}
+nav li:hover ul{
+  display: block;
+}
+nav li ul li{
+  border-top: 1px solid white;
+  font-size: 85%;
+  float: none;
+}
+nav li ul a{
+  border-width: 0;
+  border-radius: 0;
+  line-height: 40px;
+}
+/* Trigger when view port reaches a smaller size*/
+@media screen and (max-width:860px){
+  #menu {display: block;}
+  #menu-hide ul {display: none;}
+  #menu-hide:hover ul {display: block;}
+  nav {top: 80px; right: 0px;}
+  nav li{
+    width: 100vw;
+    float: none;
+  }
+  nav a{line-height: 50px;}
+  h1 {font-size: 5vw;}
+  nav li ul li{
+    float: left;
+    width: 50vw;
+    border-top: 1px dashed white;
+  }
+}

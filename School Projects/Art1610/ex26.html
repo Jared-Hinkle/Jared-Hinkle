@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- JQuery Link Below, won't hurt if it isn't required -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<meta charset="utf-8">
+<title>My Javascript Test File</title>
+
+<script>
+//Whole URL: http://grin3design.com/testimages/1610/balloon-1.jpg
+/* TESTIMAGES
+"balloon.jpg", "bird.jpg", "bug-sm.png", "cage.png", "gloom.gif", "hat-sm.png", "horse.png", "qcube.gif", "robot.gif", "robot.png", "test-pattern.jpg", "tv-frame.png"
+*/
+       var arrayImg = new Array();
+         arrayImg[0] = "balloon.jpg";
+         arrayImg[1] = "bird.jpg";
+         arrayImg[2] = "robot.gif";
+         arrayImg[3] = "hat-sm.png";
+         arrayImg[4] = "bug-sm.png";
+         arrayImg[5] = "gloom.gif";
+
+      getRandomImage(arrayImg, "");
+
+      displayImage(arrayImg);
+      function getRandomImage(imgAr, path) {
+        path = path || 'http://grin3design.com/testimages/1610/'; // default path here
+        var num = Math.floor( Math.random() * imgAr.length );
+        var img = imgAr[ num ];
+        var imgStr = '<img src="' + path + img + '"'
+                   + ' alt="">';
+        document.write(imgStr);
+        document.close();
+      }
+
+</script>
+<script>
+  $(document).ready(displayImage);
+  var imagesArray = ["balloon.jpg", "bird.jpg", "robot.gif", "hat-sm.png", "bug-sm.png", "gloom.gif", "cage.png"];
+
+  function displayImage(){
+    var num = Math.floor(Math.random() * (imagesArray.length+1));  // 0...6
+    document.canvas.src = 'http://grin3design.com/testimages/1610/' + imagesArray[num];
+  }
+</script>
+
+</head>
+<body>
+  <img src="horse.png" name="canvas" />
+</body>
+</html>
+<!-- Code sources:
+Part 1:
+Trying to use Javascript array to display Random images in <div>
+answered Oct 23 '17 at 10:24. Thum Choon Tat.
+https://stackoverflow.com/questions/46886739/trying-to-use-javascript-array-to-display-random-images-in-div
+Part 2:
+JavaScript Display Random Images
+answered Oct 30 '13 at 20:51. Roko C. Buljan. https://stackoverflow.com/questions/19693256/javascript-display-random-images
+-->
